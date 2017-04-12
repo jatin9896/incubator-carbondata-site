@@ -56,7 +56,7 @@ followed by :
 
 | Property | Value | Description |
 |---------------------------------|-----------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
-| spark.driver.extraJavaOptions | -Dcarbon.properties.filepath=$SPARK_HOME/conf/carbon.properties | A string of extra JVM options to pass to the driver. For instance, GC settings or other logging. |
+| spark.driver.extraJavaOptions | `-Dcarbon.properties.filepath=$SPARK_HOME/conf/carbon.properties` | A string of extra JVM options to pass to the driver. For instance, GC settings or other logging. |
 | spark.executor.extraJavaOptions | `-Dcarbon.properties.filepath=$SPARK_HOME/conf/carbon.properties` | A string of extra JVM options to pass to executors. For instance, GC settings or other logging. **NOTE**: You can enter multiple values separated by space. |
 
 7. Add the following properties in `$SPARK_HOME/conf/carbon.properties` file:
@@ -111,10 +111,10 @@ To get started with CarbonData : [Quick Start](quick-start-guide.md), [DDL Opera
 | spark.master | Set this value to run the Spark in yarn cluster mode. | Set yarn-client to run the Spark in yarn cluster mode. |
 | spark.yarn.dist.files | Comma-separated list of files to be placed in the working directory of each executor. |`$SPARK_HOME/conf/carbon.properties` |
 | spark.yarn.dist.archives | Comma-separated list of archives to be extracted into the working directory of each executor. |`$SPARK_HOME/carbonlib/carbondata.tar.gz` |
-| spark.executor.extraJavaOptions | A string of extra JVM options to pass to executors. For instance  **NOTE**: You can enter multiple values separated by space. |`-Dcarbon.properties.filepath=carbon.properties` |
+| spark.executor.extraJavaOptions | A string of extra JVM options to pass to executors. For instance  **NOTE**: You can enter multiple values separated by space. | `-Dcarbon.properties.filepath=carbon.properties` |
 | spark.executor.extraClassPath | Extra classpath entries to prepend to the classpath of executors. **NOTE**: If SPARK_CLASSPATH is defined in spark-env.sh, then comment it and append the values in below parameter spark.driver.extraClassPath |`carbondata.tar.gz/carbonlib/*` |
 | spark.driver.extraClassPath | Extra classpath entries to prepend to the classpath of the driver. **NOTE**: If SPARK_CLASSPATH is defined in spark-env.sh, then comment it and append the value in below parameter spark.driver.extraClassPath. |`$SPARK_HOME/carbonlib/carbonlib/*` |
-| spark.driver.extraJavaOptions | A string of extra JVM options to pass to the driver. For instance, GC settings or other logging. |`-Dcarbon.properties.filepath=$SPARK_HOME/conf/carbon.properties` |
+| spark.driver.extraJavaOptions | A string of extra JVM options to pass to the driver. For instance, GC settings or other logging. |`-Dcarbon.properties.filepath = $SPARK_HOME/conf/carbon.properties` |
 
 
 5. Add the following properties in `$SPARK_HOME/conf/carbon.properties`:
@@ -142,7 +142,8 @@ To get started with CarbonData : [Quick Start](quick-start-guide.md), [DDL Opera
    b. Run the following command to start the CarbonData thrift server.
 
    ```
-   ./bin/spark-submit --conf spark.sql.hive.thriftServer.singleSession=true
+   ./bin/spark-submit
+   --conf spark.sql.hive.thriftServer.singleSession=true
    --class org.apache.carbondata.spark.thriftserver.CarbonThriftServer
    $SPARK_HOME/carbonlib/$CARBON_ASSEMBLY_JAR <carbon_store_path>
    ```
@@ -157,7 +158,8 @@ To get started with CarbonData : [Quick Start](quick-start-guide.md), [DDL Opera
    * Start with default memory and executors.
 
 ```
-./bin/spark-submit --conf spark.sql.hive.thriftServer.singleSession=true 
+./bin/spark-submit
+--conf spark.sql.hive.thriftServer.singleSession=true
 --class org.apache.carbondata.spark.thriftserver.CarbonThriftServer 
 $SPARK_HOME/carbonlib
 /carbondata_2.10-0.1.0-incubating-SNAPSHOT-shade-hadoop2.7.2.jar 
@@ -167,7 +169,8 @@ hdfs://<host_name>:port/user/hive/warehouse/carbon.store
    * Start with Fixed executors and resources.
 
 ```
-./bin/spark-submit --conf spark.sql.hive.thriftServer.singleSession=true 
+./bin/spark-submit
+--conf spark.sql.hive.thriftServer.singleSession=true
 --class org.apache.carbondata.spark.thriftserver.CarbonThriftServer 
 --num-executors 3 --driver-memory 20g --executor-memory 250g 
 --executor-cores 32 

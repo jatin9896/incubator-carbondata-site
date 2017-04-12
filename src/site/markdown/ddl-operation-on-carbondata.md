@@ -32,6 +32,7 @@ The following DDL operations are supported in CarbonData :
 
 ## CREATE TABLE
   This command can be used to create a CarbonData table by specifying the list of fields along with the table properties.
+
 ```
    CREATE TABLE [IF NOT EXISTS] [db_name.]table_name
                     [(col_name data_type , ...)]
@@ -44,9 +45,9 @@ The following DDL operations are supported in CarbonData :
 
 | Parameter | Description | Optional |
 |---------------|-----------------------------------------------------------------------------------------------------------------------------------------------|----------|
-| db_name | Name of the database. Database name should consist of alphanumeric characters and underscore(_) special character. | Yes |
-| field_list | Comma separated List of fields with data type. The field names should consist of alphanumeric characters and underscore(_) special character. | No |
-| table_name | The name of the table in Database. Table Name should consist of alphanumeric characters and underscore(_) special character. | No |
+| db_name | Name of the database. Database name should consist of alphanumeric characters and underscore(\_) special character. | Yes |
+| field_list | Comma separated List of fields with data type. The field names should consist of alphanumeric characters and underscore(\_) special character. | No |
+| table_name | The name of the table in Database. Table Name should consist of alphanumeric characters and underscore(\_) special character. | No |
 | STORED BY | "org.apache.carbondata.format", identifies and creates a CarbonData table. | No |
 | TBLPROPERTIES | List of CarbonData table properties. |  |
 
