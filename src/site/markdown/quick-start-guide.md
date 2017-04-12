@@ -84,8 +84,7 @@ scala>carbon.sql("CREATE TABLE
 ###### Loading Data to a Table
 
 ```
-scala>carbon.sql("LOAD DATA INPATH
-                  'sample.csv file path'
+scala>carbon.sql("LOAD DATA INPATH 'sample.csv file path'
                   INTO TABLE test_table")
 ```
 **NOTE**: Please provide the real file path of `sample.csv` for the above script.
@@ -148,8 +147,7 @@ scala>cc.sql("SHOW TABLES").show()
 ###### Loading Data to a Table
 
 ```
-scala>cc.sql("LOAD DATA INPATH
-              'sample.csv file path'
+scala>cc.sql("LOAD DATA INPATH 'sample.csv file path'
               INTO TABLE test_table")
 ```
 **NOTE**: Please provide the real file path of `sample.csv` for the above script.
