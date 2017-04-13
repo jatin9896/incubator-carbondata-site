@@ -355,9 +355,9 @@ The following conditions must be met for successful updation :
 
 ```
  UPDATE t_carbn01 a
- SET (a.item_type_code, a.profit) = ( SELECT b.item_type_cd,
+ SET (a.item_type_code, a.profit) = (SELECT b.item_type_cd,
  sum(b.profit) from t_carbn01b b
- WHERE item_type_cd =2 group by item_type_code);
+ WHERE item_type_cd = 2 group by item_type_code);
 ```
 
 Here the Update Operation fails as the query contains aggregate function sum(b.profit) and group by clause in the sub-query.
@@ -367,14 +367,14 @@ Here the Update Operation fails as the query contains aggregate function sum(b.p
 UPDATE carbonTable1 d
 SET(d.column3,d.column5 ) = (SELECT s.c33 ,s.c55
 FROM sourceTable1 s WHERE d.column1 = s.c11)
-WHERE d.column1 = 'china' EXISTS( SELECT * from table3 o where o.c2 > 1);
+WHERE d.column1 = 'china' EXISTS(SELECT * from table3 o where o.c2 > 1);
 ```
 
 
 ```
 UPDATE carbonTable1 d SET (c3) = (SELECT s.c33 from sourceTable1 s
 WHERE d.column1 = s.c11)
-WHERE exists( select * from iud.other o where o.c2 > 1);
+WHERE exists(SELECT * from iud.other o where o.c2 > 1);
 ```
 
 
