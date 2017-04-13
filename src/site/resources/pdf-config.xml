@@ -21,7 +21,7 @@
 <!-- These values are optimized for an A4 paper size. -->
 
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:fo="http://www.w3.org/1999/XSL/Format" version="1.0">
-
+    <!--<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format"></fo:root>-->
     <!-- Layout master sets -->
     <xsl:attribute-set name="layout.master.set.base">
         <xsl:attribute name="page-width">8.27in</xsl:attribute>
@@ -359,11 +359,19 @@
         <xsl:attribute name="padding-end">5pt</xsl:attribute>
         <!-- http://xmlgraphics.apache.org/fop/faq.html#keep-together -->
         <xsl:attribute name="keep-together.within-column">always</xsl:attribute>
+        <xsl:attribute name="inline-progression-dimension">auto</xsl:attribute>
+        <xsl:attribute name="overflow">visible</xsl:attribute>
+        <xsl:attribute name="hyphenate">true</xsl:attribute>
     </xsl:attribute-set>
     <xsl:attribute-set name="base.block">
         <xsl:attribute name="font-family">Helvetica,sans-serif</xsl:attribute>
         <xsl:attribute name="line-height">1.2em</xsl:attribute>
-    </xsl:attribute-set>s
+
+        <xsl:attribute name="wrap-option">wrap</xsl:attribute>
+        <xsl:attribute name="inline-progression-dimension">auto</xsl:attribute>
+        <xsl:attribute name="overflow">visible</xsl:attribute>
+        <xsl:attribute name="hyphenate">true</xsl:attribute>
+    </xsl:attribute-set>
 
     <xsl:attribute-set name="table.padding">
         <xsl:attribute name="padding-before">9pt</xsl:attribute>

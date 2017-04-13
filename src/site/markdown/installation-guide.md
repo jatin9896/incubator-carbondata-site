@@ -151,7 +151,7 @@ To get started with CarbonData : [Quick Start](quick-start-guide.md), [DDL Opera
 | Parameter | Description | Example |
 |---------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------|
 | CARBON_ASSEMBLY_JAR | CarbonData assembly jar name present in the $SPARK_HOME/carbonlib/ folder. | carbondata_2.10-0.1.0-incubating-SNAPSHOT-shade-hadoop2.7.2.jar |
-| carbon_store_path | This is a parameter to the CarbonThriftServer class. This a HDFS path where CarbonData files will be kept. Strongly Recommended to put same as carbon.storelocation parameter of carbon.properties. | hdfs:// \<host_name\> :port/user/hive/warehouse/carbon.store |
+| carbon_store_path | This is a parameter to the CarbonThriftServer class. This a HDFS path where CarbonData files will be kept. Strongly Recommended to put same as carbon.storelocation parameter of carbon.properties. | hdfs://HOSTNAME:PORT/user/hive/warehouse/carbon.store |
 
 **Examples**
    
