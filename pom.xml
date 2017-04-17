@@ -180,6 +180,9 @@
                 <resource>
                   <directory>${basedir}/target/pdf</directory>
                   <filtering>false</filtering>
+                  <includes>
+                    <include>**/*.pdf</include>
+                  </includes>
                 </resource>
               </resources>
             </configuration>
