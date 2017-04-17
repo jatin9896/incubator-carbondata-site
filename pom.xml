@@ -46,7 +46,7 @@
         <groupId>org.scala-tools</groupId>
         <artifactId>maven-scala-plugin</artifactId>
         <version>2.12.1</version>
-        <!--  <executions>
+          <executions>
               <execution>
                   <goals>
                       <goal>add-source</goal>
@@ -54,7 +54,7 @@
                       <goal>testCompile</goal>
                   </goals>
               </execution>
-          </executions>-->
+          </executions>
       </plugin>
 
       <plugin>
@@ -134,6 +134,25 @@
         <version>3.0.2</version>
         <executions>
           <execution>
+            <id>publish-pdf</id>
+            <phase>install</phase>
+            <goals>
+              <goal>copy-resources</goal>
+            </goals>
+            <configuration>
+              <outputDirectory>${basedir}/src/pdf</outputDirectory>
+              <resources>
+                <resource>
+                  <directory>${basedir}/target/pdf</directory>
+                  <filtering>false</filtering>
+                  <includes>
+                    <include>**/*.pdf</include>
+                  </includes>
+                </resource>
+              </resources>
+            </configuration>
+          </execution>
+          <execution>
             <id>publish-site</id>
             <phase>install</phase>
             <goals>
@@ -150,20 +169,17 @@
             </configuration>
           </execution>
           <execution>
-            <id>publish-pdf</id>
+            <id>copy-pdf</id>
             <phase>install</phase>
             <goals>
               <goal>copy-resources</goal>
             </goals>
             <configuration>
-              <outputDirectory>${basedir}/content/pdf</outputDirectory>
+              <outputDirectory>${basedir}/content/pdf/</outputDirectory>
               <resources>
                 <resource>
                   <directory>${basedir}/target/pdf</directory>
                   <filtering>false</filtering>
-                  <includes>
-                    <include>**/*.pdf</include>
-                  </includes>
                 </resource>
               </resources>
             </configuration>
