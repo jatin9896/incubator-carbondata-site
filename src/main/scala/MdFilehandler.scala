@@ -38,6 +38,10 @@ class MdFilehandler {
     contentAfterReplacingFileLink
   }
 
+  /**
+    * This handles the execption cases for retaining .md extensions in some files
+    * @return list of files
+    */
   def ConvertReadMeExtension(): List[String] = {
     val listOfFiles = ConfigFactory.load().getStringList("fileListToRetain").asScala.toList
     logger.info(s"List of files to retain .md extensions : $listOfFiles")
