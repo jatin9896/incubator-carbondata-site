@@ -16,7 +16,7 @@ class FileModification {
   val headerContent: String = Source.fromFile(ConfigFactory.load().getString("headerPath")).mkString
   val footerContent: String = Source.fromFile(ConfigFactory.load().getString("footerPath")).mkString
   val location = ConfigFactory.load().getString("outputFileLocation")
-  val Mdlocation = ConfigFactory.load().getString("MdFileLocation")
+  val mdLocation = ConfigFactory.load().getString("MdFileLocation")
   val fileReadObject = new MdFilehandler
 
   /**
@@ -33,7 +33,7 @@ class FileModification {
         case Some(data: String) => val fileData = fileReadObject.ConvertMdExtension(data)
           logger.info("Begin writing [" + file + outputFileExtension + "] at " + location)
           writeHtmlFile(location + file + outputFileExtension, fileData)
-          writeMdFile(Mdlocation + file + inputFileExtension, fileURLContent)
+          writeMdFile(mdLocation + file + inputFileExtension, fileURLContent)
           logger.info("Successfully written [" + file + outputFileExtension + "] at " + location)
           "Success"
         case None => logger.error(s"$file Conversion failed ")

@@ -10,19 +10,16 @@
 
   <toc name="Table of Contents">
     <item name="Quick Start" ref='quick-start-guide.md'/>
-    <item name="User Guide" ref='user-guide-toc.md'/>
-    <item name="Overview" ref='overview-of-carbondata.md'/>
     <item name="CarbonData File Structure" ref='file-structure-of-carbondata.md'/>
     <item name="Data Types" ref='supported-data-types-in-carbondata.md'/>
-    <item name="Installation" ref='installation-guide.md'/>
-    <item name="Configuring CarbonData" ref='configuration-parameters.md'/>
-    <item name="Using CarbonData" ref='using-carbondata.md'/>
     <item name="Data Management" ref='data-management.md'/>
     <item name="DDL" ref='ddl-operation-on-carbondata.md'/>
     <item name="DML" ref='dml-operation-on-carbondata.md '/>
-    <item name="Useful Tips" ref='useful-tips-on-carbondata.md'/>
-    <item name="Troubleshooting" ref='troubleshooting.md'/>
+    <item name="Installation" ref='installation-guide.md'/>
+    <item name="Configuring CarbonData" ref='configuration-parameters.md'/>
     <item name="FAQs" ref='faq.md'/>
+    <item name="Troubleshooting" ref='troubleshooting.md'/>
+    <item name="Useful Tips" ref='useful-tips-on-carbondata.md'/>
 
   </toc>
 
