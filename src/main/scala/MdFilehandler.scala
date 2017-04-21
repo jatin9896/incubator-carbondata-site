@@ -1,19 +1,15 @@
 import java.io.{File, PrintWriter}
 
-import com.typesafe.config.ConfigFactory
-import org.apache.http.HttpResponse
-import org.apache.http.client.methods.HttpPost
-import org.apache.http.impl.client.DefaultHttpClient
-import org.apache.http.util.EntityUtils
+import com.google.inject.Inject
 import org.slf4j.LoggerFactory
+import services.{DataService, ResourceService}
 
 import scala.util.matching.Regex
-import scala.collection.JavaConverters._
 
 /**
   * Created by pallavi on 4/4/17.
   */
-class MdFilehandler {
+class MdFilehandler @Inject()(resourceService: ResourceService,dataService: DataService) {
 
   val logger = LoggerFactory.getLogger(classOf[MdFilehandler])
 
@@ -39,49 +35,21 @@ class MdFilehandler {
   }
 
   /**
-    * This handles the execption cases for retaining .md extensions in some files
+    * This handles the exeception cases for retaining .md extensions in some files
+    *
     * @return list of files
     */
   def ConvertReadMeExtension(): List[String] = {
-    val listOfFiles = ConfigFactory.load().getStringList("fileListToRetain").asScala.toList
+    val listOfFiles = resourceService.readListOfString("fileListToRetain")
     logger.info(s"List of files to retain .md extensions : $listOfFiles")
-    val location = ConfigFactory.load().getString("outputFileLocation")
+    val location = resourceService.readString("outputFileLocation")
     val outputFileExtension = ".html"
     val modifyMdPattern = new Regex("(README)(.html)")
-
     listOfFiles.map { file =>
-      val fileURLContent = scala.io.Source.fromFile("src/main/webapp/" + file + outputFileExtension).mkString
-      val writer = new PrintWriter(new File(location + file + outputFileExtension))
+      val fileURLContent = dataService.readFromFile("src/main/webapp/" + file + outputFileExtension)
       val fileContent = modifyMdPattern replaceAllIn(fileURLContent, "$1.md")
-      writer.write(fileContent)
-      writer.close()
+      dataService.writeToFile(location + file + outputFileExtension,fileContent)
       fileContent
-    }
-
-  }
-
-  /**
-    * gets content of the file through rest call
-    *
-    * @param data file Url
-    * @return contents of the file in responseBody if found else None is returned
-    */
-  def getFileContent(data: String): Option[String] = {
-    val httpClient = new DefaultHttpClient()
-    val httpRequest: HttpPost = new HttpPost(ConfigFactory.load().getString("mdLink"));
-    httpRequest.setHeader("Content-type", "text/plain")
-
-    import org.apache.http.entity.StringEntity;
-    val test = new StringEntity(data)
-    httpRequest.setEntity(test)
-    val httpResponse: HttpResponse = httpClient.execute(httpRequest)
-    val responseBody = EntityUtils.toString(httpResponse.getEntity())
-    logger.info(s"status : {${httpResponse.getStatusLine.toString.contains("OK")}}")
-    if (httpResponse.getStatusLine.toString.contains("OK"))
-      Some(responseBody.toString)
-    else {
-      logger.error(s"Fetching file fails {${httpResponse.getStatusLine}}")
-      None
     }
 
   }

@@ -225,10 +225,29 @@
       <artifactId>mockito-all</artifactId>
       <version>1.9.5</version>
     </dependency>
-    <dependency>
+    <!--<dependency>
       <groupId>org.scalatest</groupId>
       <artifactId>scalatest_2.11</artifactId>
       <version>3.0.1</version>
+    </dependency>-->
+    <!-- https://mvnrepository.com/artifact/org.scalatest/scalatest_2.12 -->
+    <dependency>
+      <groupId>org.scalatest</groupId>
+      <artifactId>scalatest_2.12</artifactId>
+      <version>3.0.1</version>
+    </dependency>
+
+    <!-- https://mvnrepository.com/artifact/org.scalastyle/scalastyle-maven-plugin -->
+    <dependency>
+      <groupId>org.scalastyle</groupId>
+      <artifactId>scalastyle-maven-plugin</artifactId>
+      <version>0.8.0</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/com.google.inject/guice -->
+    <dependency>
+      <groupId>com.google.inject</groupId>
+      <artifactId>guice</artifactId>
+      <version>3.0</version>
     </dependency>
   </dependencies>
 </project>
