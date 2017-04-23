@@ -1,6 +1,6 @@
 import com.google.inject.Inject
 import org.slf4j.LoggerFactory
-import services._
+import services.{FileService,ConfFileService,HttpService}
 
 object FileOperationMain  {
   def main(args: Array[String]) {
@@ -12,4 +12,3 @@ object FileOperationMain  {
     logger.info(s"File Conversion to html : $status")
   }
 }
-

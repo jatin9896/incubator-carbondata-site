@@ -11,7 +11,7 @@ class FileModification @Inject()(dataService: DataService, resourceService: Reso
   val footerContent: String = dataService.readFromFile(resourceService.readString("footerPath"))
   val location = resourceService.readString("outputFileLocation")
   val mdLocation = resourceService.readString("MdFileLocation")
-  val fileReadObject = new MdFilehandler(resourceService,dataService)
+  val fileReadObject = new MdFilehandler(resourceService, dataService)
 
   /**
     * reads list of files , converts file extension to output file extension and writes file to the location
@@ -24,21 +24,28 @@ class FileModification @Inject()(dataService: DataService, resourceService: Reso
       val fileURLContent = webService.dataOnGetRequest(url + file + inputFileExtension)
       val getFileData = webService.dataOnPostRequest(fileURLContent)
       getFileData match {
-        case Some(data: String) => val fileData = fileReadObject.ConvertMdExtension(data)
-          logger.info("Begin writing [" + file + outputFileExtension + "] at " + location)
-          dataService.writeToFile(location + file + outputFileExtension, headerContent + fileData + footerContent)
-          dataService.writeToFile(mdLocation + file + inputFileExtension, fileURLContent)
-          logger.info("Successfully written [" + file + outputFileExtension + "] at " + location)
-          "Success"
+        case Some(data: String) => val fileData = fileReadObject.convertMdExtension(data)
+          logger.info(s"Begin writing [ $file outputFileExtension ] at $location")
+          val statusHtmlFile = dataService.writeToFile(location + file + outputFileExtension, headerContent + fileData + footerContent)
+          val statusMdFile = dataService.writeToFile(mdLocation + file + inputFileExtension, fileURLContent)
+          if (statusHtmlFile && statusMdFile) {
+            logger.info(s"Successfully written [ $file $outputFileExtension ] at $location")
+            "Success"
+          }
+          else {
+            "Failure"
+          }
         case None => logger.error(s"$file Conversion failed ")
           "Failure"
       }
     }
 
-    if (statusList.contains("Failure"))
+    if (statusList.contains("Failure")) {
       "Some Files Failed To Convert"
-    else
+    }
+    else {
       "All files successfully Converted"
+    }
   }
 }
 

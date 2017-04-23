@@ -4,7 +4,6 @@ import com.typesafe.config.ConfigFactory
 import org.slf4j.LoggerFactory
 
 import scala.collection.JavaConverters._
-import scala.io.Source
 
 
 class ConfFileService extends ResourceService {

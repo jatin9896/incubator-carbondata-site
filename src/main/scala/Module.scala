@@ -1,7 +1,7 @@
 import com.google.inject.AbstractModule
-import services._
+import services.{DataService,FileService,ResourceService,ConfFileService,WebService,HttpService}
 
-class Module extends AbstractModule{
+class Module extends AbstractModule {
   override def configure() = {
     bind(classOf[DataService]).to(classOf[FileService])
     bind(classOf[ResourceService]).to(classOf[ConfFileService])
