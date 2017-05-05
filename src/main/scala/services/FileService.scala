@@ -17,7 +17,7 @@ class FileService extends DataService {
     */
   def writeToFile(path: String, data: String): Boolean = {
     try {
-      val writer = new PrintWriter(new File(path))
+      val writer: PrintWriter = new PrintWriter(new File(path))
       writer.write(data)
       writer.close()
       true
@@ -31,7 +31,7 @@ class FileService extends DataService {
 
 
   def readFromFile(path: String): String = {
-    val fileTest = new File(path)
+    val fileTest: File = new File(path)
     if (fileTest.isFile && fileTest.exists()) {
       scala.io.Source.fromFile(path).mkString
     }

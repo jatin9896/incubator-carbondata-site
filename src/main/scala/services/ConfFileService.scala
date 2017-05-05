@@ -1,13 +1,13 @@
 package services
 
 import com.typesafe.config.ConfigFactory
-import org.slf4j.LoggerFactory
+import org.slf4j.{Logger, LoggerFactory}
 
 import scala.collection.JavaConverters._
 
 
 class ConfFileService extends ResourceService {
-  val logger = LoggerFactory.getLogger(classOf[ConfFileService])
+  val logger: Logger = LoggerFactory.getLogger(classOf[ConfFileService])
 
   /**
     * Reads a filename from application.conf file
@@ -26,7 +26,7 @@ class ConfFileService extends ResourceService {
     * @return list of string
     */
   def readListOfString(key: String): List[String] = {
-    val listOfFiles = ConfigFactory.load().getStringList(key).asScala.toList
+    val listOfFiles: List[String] = ConfigFactory.load().getStringList(key).asScala.toList
     logger.info(s"List of files : $listOfFiles")
     listOfFiles
   }

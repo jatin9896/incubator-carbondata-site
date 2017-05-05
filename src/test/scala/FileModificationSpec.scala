@@ -2,13 +2,13 @@
 import org.mockito.Mockito.when
 import org.scalatest.FlatSpec
 import org.scalatest.mock.MockitoSugar
-import org.slf4j.LoggerFactory
+import org.slf4j.{Logger, LoggerFactory}
 import services.{FileService, ResourceService, WebService}
 
-class FileModificationSpec extends FlatSpec with MockitoSugar {
-  val logger = LoggerFactory.getLogger("FileModificationSpec")
-  val dataServiceMock = mock[FileService]
-  val webServiceMock = mock[WebService]
+class FileModificationSpec extends FlatSpec with MockitoSugar{
+  val logger: Logger = LoggerFactory.getLogger("FileModificationSpec")
+  val dataServiceMock: FileService = mock[FileService]
+  val webServiceMock: WebService = mock[WebService]
   val data="some data"
   val convertedData="some converted data"
   val resourceServiceMock = mock[ResourceService]

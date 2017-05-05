@@ -1,12 +1,12 @@
 import com.google.inject.Inject
-import org.slf4j.LoggerFactory
+import org.slf4j.{Logger, LoggerFactory}
 import services.{DataService, ResourceService}
 
 import scala.util.matching.Regex
 
 class MdFilehandler @Inject()(resourceService: ResourceService, dataService: DataService) {
 
-  val logger = LoggerFactory.getLogger(classOf[MdFilehandler])
+  val logger: Logger = LoggerFactory.getLogger(classOf[MdFilehandler])
 
   /**
     * converts .md extension to .html extension
@@ -16,12 +16,12 @@ class MdFilehandler @Inject()(resourceService: ResourceService, dataService: Dat
     * @return contents of file
     */
   def convertMdExtension(input: String): String = {
-    val modifyContentPattern = new Regex("id=\"user-content-")
-    val modifyMdPattern = new Regex(".md")
-    val modifyImagePattern = new Regex("<img src=\"../docs")
-    val modifyHttpsFileLink ="""(<a href=\"https)://([a-zA-Z0-9-/.]+)(\")""".r
-    val modifyHttpFileLink ="""(<a href=\"http)://([a-zA-Z0-9-/.]+)(\")""".r
-    val replacingImageContent= "<img src=\"https://github.com/apache/incubator-carbondata/blob/master/docs"
+    val modifyContentPattern: Regex = new Regex("id=\"user-content-")
+    val modifyMdPattern: Regex = new Regex(".md")
+    val modifyImagePattern: Regex = new Regex("<img src=\"../docs")
+    val modifyHttpsFileLink: Regex ="""(<a href=\"https)://([a-zA-Z0-9-/.]+)(\")""".r
+    val modifyHttpFileLink: Regex ="""(<a href=\"http)://([a-zA-Z0-9-/.]+)(\")""".r
+    val replacingImageContent: String = "<img src=\"https://github.com/apache/incubator-carbondata/blob/master/docs"
     val contentAfterRemovingUserContent: String = modifyContentPattern replaceAllIn(input, "id=\"")
     val contentAfterReplacingId: String = modifyMdPattern replaceAllIn(contentAfterRemovingUserContent, ".html")
     val contentAfterReplacingImage: String = modifyImagePattern replaceAllIn(contentAfterReplacingId,replacingImageContent)
@@ -36,14 +36,14 @@ class MdFilehandler @Inject()(resourceService: ResourceService, dataService: Dat
     * @return list of files
     */
   def convertReadMeExtension(): List[String] = {
-    val listOfFiles = resourceService.readListOfString("fileListToRetain")
+    val listOfFiles: List[String] = resourceService.readListOfString("fileListToRetain")
     logger.info(s"List of files to retain .md extensions : $listOfFiles")
-    val location = resourceService.readString("outputFileLocation")
-    val outputFileExtension = ".html"
-    val modifyMdPattern = new Regex("(README)(.html)")
+    val location: String = resourceService.readString("outputFileLocation")
+    val outputFileExtension: String = ".html"
+    val modifyMdPattern: Regex = new Regex("(README)(.html)")
     listOfFiles.map { file =>
-      val fileURLContent = dataService.readFromFile("src/main/webapp/" + file + outputFileExtension)
-      val fileContent = modifyMdPattern replaceAllIn(fileURLContent, "$1.md")
+      val fileURLContent: String = dataService.readFromFile("src/main/webapp/" + file + outputFileExtension)
+      val fileContent: String = modifyMdPattern replaceAllIn(fileURLContent, "$1.md")
       dataService.writeToFile(location + file + outputFileExtension, fileContent)
       fileContent
     }

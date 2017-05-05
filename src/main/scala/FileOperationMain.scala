@@ -1,13 +1,13 @@
-import org.slf4j.LoggerFactory
+import org.slf4j.{Logger, LoggerFactory}
 import services.{ConfFileService, FileService, HttpService}
 
 object FileOperationMain  {
-  def main(args: Array[String]) {
-    val logger = LoggerFactory.getLogger("FileOperationMain")
+  def main(args: Array[String]):Unit= {
+    val logger: Logger = LoggerFactory.getLogger("FileOperationMain")
 
-    val fileObject = new FileModification(new FileService,new ConfFileService,new HttpService)
+    val fileObject: FileModification = new FileModification(new FileService,new ConfFileService,new HttpService)
 
-    val status = fileObject.convertToHtml()
+    val status: String = fileObject.convertToHtml()
     logger.info(s"File Conversion to html : $status")
   }
 }

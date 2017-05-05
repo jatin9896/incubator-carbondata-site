@@ -4,7 +4,7 @@ import com.typesafe.config.ConfigFactory
 import org.apache.http.HttpResponse
 import org.apache.http.client.methods.HttpPost
 import org.apache.http.entity.StringEntity
-import org.apache.http.impl.client.{HttpClients, DefaultHttpClient}
+import org.apache.http.impl.client.HttpClients
 import org.apache.http.util.EntityUtils
 import org.slf4j.LoggerFactory
 
@@ -18,14 +18,14 @@ class HttpService extends WebService {
     * @return contents of the file in responseBody if found else None is returned
     */
   def dataOnPostRequest(fileUrl: String): Option[String] = {
-    val httpClient = HttpClients.createDefault();
+    val httpClient = HttpClients.createDefault()
     val httpRequest: HttpPost = new HttpPost(ConfigFactory.load().getString("mdLink"))
     httpRequest.setHeader("Content-type", "text/plain")
 
-    val test = new StringEntity(fileUrl)
+    val test: StringEntity = new StringEntity(fileUrl)
     httpRequest.setEntity(test)
     val httpResponse: HttpResponse = httpClient.execute(httpRequest)
-    val responseBody = EntityUtils.toString(httpResponse.getEntity)
+    val responseBody: String = EntityUtils.toString(httpResponse.getEntity)
     logger.info(s"status : {${httpResponse.getStatusLine.toString.contains("OK")}}")
     if (httpResponse.getStatusLine.toString.contains("OK")) {
       Some(responseBody.toString)
