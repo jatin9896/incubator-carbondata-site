@@ -4,7 +4,7 @@ import com.typesafe.config.ConfigFactory
 import org.apache.http.HttpResponse
 import org.apache.http.client.methods.HttpPost
 import org.apache.http.entity.StringEntity
-import org.apache.http.impl.client.DefaultHttpClient
+import org.apache.http.impl.client.{HttpClients, DefaultHttpClient}
 import org.apache.http.util.EntityUtils
 import org.slf4j.LoggerFactory
 
@@ -18,7 +18,7 @@ class HttpService extends WebService {
     * @return contents of the file in responseBody if found else None is returned
     */
   def dataOnPostRequest(fileUrl: String): Option[String] = {
-    val httpClient = new DefaultHttpClient()
+    val httpClient = HttpClients.createDefault();
     val httpRequest: HttpPost = new HttpPost(ConfigFactory.load().getString("mdLink"))
     httpRequest.setHeader("Content-type", "text/plain")
 
