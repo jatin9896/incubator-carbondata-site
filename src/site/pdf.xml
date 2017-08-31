@@ -16,6 +16,7 @@
       <item name="DDL" ref='ddl-operation-on-carbondata.md'/>
         <item name="DML" ref='dml-operation-on-carbondata.md '/>
         <item name="Installation" ref='installation-guide.md'/>
+        <item name="Partition Guide" ref='partition-guide.md'/>
     <item name="Configuring CarbonData" ref='configuration-parameters.md'/>
     <item name="FAQs" ref='faq.md'/>
     <item name="Troubleshooting" ref='troubleshooting.md'/>
